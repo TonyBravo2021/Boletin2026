@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Boletín Estadístico UGEL 07 · 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --guinda:#7a1f3d;
+  --guinda-2:#5c1229;
+  --guinda-3:#38080f;
+  --plomo:#5b6472;
+  --plomo-2:#8a94a3;
+  --plomo-3:#e6e8ec;
+  --plomo-4:#f6f7f9;
+  --azulino:#2f6db3;
+  --rojizo:#b52d3f;
+  --tinta:#2a2f3a;
+  --font-display:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-ui:'Barlow Condensed', 'Oswald', 'Arial Narrow', system-ui, sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:14px;
+  background:radial-gradient(circle at 50% -10%, #41454f 0%, #23262d 45%, #0d0f13 100%);
+  font-family:var(--font-body);
+  color:#fff;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ============ LIBRO ============ */
+.book{
+  position:relative;
+  width:min(1180px, 96vw, 116vh);
+  aspect-ratio:1.42 / 1;
+  background:
+    radial-gradient(120% 90% at 50% 0%, #4a0f22 0%, #2a0714 55%, #17040b 100%);
+  border-radius:10px;
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.70),
+    0 8px 24px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.07),
+    inset 0 0 0 1px rgba(0,0,0,.35);
+  overflow:hidden;
+  font-size:clamp(13px, 1.06vw, 15.5px);
+  user-select:none;
+}
+.book.single{
+  width:min(520px, 94vw, 55vh);
+  aspect-ratio:1 / 1.42;
+}
+.book-inner{
+  position:absolute;inset:0;
+  perspective:2400px;
+  perspective-origin:50% 50%;
+}
+.book::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 7px);
+  opacity:.5;pointer-events:none;
+}
+
+/* ============ HOJAS ============ */
+.leaf{
+  position:absolute;top:0;right:0;height:100%;width:50%;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  transition:transform .95s cubic-bezier(.42,.05,.28,1);
+  will-change:transform;
+}
+.book.single .leaf{width:100%;}
+.leaf.flipped{transform:rotateY(-180deg);}
+.no-anim .leaf{transition:none !important;}
+
+.face{
+  position:absolute;inset:0;
+  background:#fff;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  overflow:hidden;
+}
+.face.back{transform:rotateY(180deg);}
+.face::after{
+  content:'';
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to left, rgba(30,10,18,0) 45%, rgba(30,10,18,.22) 100%);
+  opacity:0;transition:opacity .5s ease;
+}
+.leaf.turning .face::after{opacity:1;}
+
+/* lomo */
+.gutter{
+  position:absolute;left:50%;top:0;bottom:0;width:80px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.05) 35%,
+    rgba(0,0,0,.14) 48%,
+    rgba(0,0,0,.20) 50%,
+    rgba(0,0,0,.14) 52%,
+    rgba(0,0,0,.05) 65%,
+    rgba(0,0,0,0) 100%);
+  pointer-events:none;z-index:1000;
+}
+.book.single .gutter{display:none;}
+
+/* ============ PÁGINA ============ */
+.pg{
+  position:absolute;inset:0;
+  padding:26px 30px 44px;
+  overflow-y:auto;overflow-x:hidden;
+  font-size:.95em;
+  line-height:1.52;
+  color:#39404d;
+  scrollbar-width:thin;
+  scrollbar-color:#cfd3da transparent;
+  user-select:text;
+}
+.pg::-webkit-scrollbar{width:5px;}
+.pg::-webkit-scrollbar-thumb{background:#cfd3da;border-radius:3px;}
+.pg::-webkit-scrollbar-track{background:transparent;}
+
+.folio{
+  position:absolute;bottom:11px;left:0;right:0;text-align:center;
+  font-family:var(--font-ui);font-size:.8em;letter-spacing:.16em;
+  color:#b3a8ae;pointer-events:none;
+}
+
+/* tipografía editorial */
+.pg h1,.pg h2,.pg h3,.pg h4{margin:0;}
+.pg h2{
+  font-family:var(--font-display);
+  font-size:1.6em;line-height:1.13;letter-spacing:-.012em;
+  color:var(--guinda-2);
+}
+.pg h3{
+  font-family:var(--font-body);
+  font-size:.92em;font-weight:700;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--guinda);
+  margin:1.15em 0 .5em;
+}
+.pg p{margin:0 0 .72em;text-align:justify;hyphens:auto;}
+.pg ul{margin:.2em 0 .8em 1.05em;padding:0;}
+.pg li{margin-bottom:.32em;}
+.pg strong{color:var(--guinda-2);font-weight:700;}
+
+.kicker{
+  font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.22em;
+  font-size:.72em;font-weight:700;color:var(--plomo-2);margin-bottom:.35em;
+}
+.rule{width:50px;height:3px;background:linear-gradient(90deg,var(--guinda),#c07a92);border-radius:2px;margin:.55em 0 .95em;}
+.lead{font-size:1.02em;color:#4a5361;}
+.small{font-size:.8em;color:var(--plomo);}
+
+/* tablas */
+.pg table{width:100%;border-collapse:collapse;font-size:.8em;margin:.55em 0 .8em;}
+.pg thead th{
+  background:var(--guinda);color:#fff;font-weight:600;
+  padding:5px 7px;text-align:left;
+  font-family:var(--font-ui);letter-spacing:.05em;font-size:1.06em;
+  border-right:1px solid rgba(255,255,255,.12);
+}
+.pg thead th:last-child{border-right:0;}
+.pg td{padding:4px 7px;border-bottom:1px solid #eceef1;}
+.pg tbody tr:nth-child(even){background:#faf7f8;}
+.pg .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.pg tr.total td{font-weight:700;background:#f4e8ec;border-top:2px solid var(--guinda);border-bottom:0;}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.55em;margin:.85em 0;}
+.kpi{
+  background:linear-gradient(160deg,#fdfbfc,#f3eff1);
+  border:1px solid #ecdfe4;border-left:3px solid var(--guinda);
+  border-radius:7px;padding:.55em .65em;
+}
+.kpi .k-label{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.1em;font-size:.66em;color:var(--plomo);font-weight:600;line-height:1.15;}
+.kpi .k-value{font-family:var(--font-display);font-size:1.45em;font-weight:700;color:var(--guinda-2);line-height:1.1;margin-top:.12em;}
+.kpi .k-sub{font-size:.64em;color:var(--plomo-2);line-height:1.2;}
+
+/* dona */
+.donut-block{display:flex;gap:1em;align-items:center;margin:.6em 0 .9em;}
+.donut{flex:0 0 148px;max-width:148px;}
+.donut svg{width:100%;height:auto;display:block;}
+.d-center{font-family:var(--font-display);font-size:34px;font-weight:700;fill:#4a0f22;}
+.d-sub{font-family:var(--font-ui);font-size:14px;letter-spacing:.13em;fill:#8a94a3;text-transform:uppercase;font-weight:600;}
+.donuts-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em;margin:.7em 0 .9em;}
+.donuts-3 .donut{flex:none;max-width:100%;width:100%;}
+.donuts-3 .d-center{font-size:30px;}
+.donuts-3 .d-sub{font-size:13px;}
+
+.legend{display:flex;flex-direction:column;gap:.32em;font-size:.8em;min-width:0;}
+.legend .li{display:flex;align-items:center;gap:.45em;color:var(--plomo);}
+.legend .dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto;}
+.legend b{color:var(--guinda-2);font-variant-numeric:tabular-nums;}
+
+/* barras */
+.bar-line{margin-bottom:.52em;}
+.bar-line .bl-head{display:flex;justify-content:space-between;font-size:.76em;font-weight:700;color:var(--plomo);margin-bottom:.18em;font-family:var(--font-ui);letter-spacing:.05em;text-transform:uppercase;}
+.bar-track{height:11px;background:#eceef2;border-radius:6px;overflow:hidden;display:flex;}
+.bar-seg{height:100%;}
+.bar-seg.priv{background:var(--azulino);}
+.bar-seg.pub{background:var(--rojizo);}
+
+/* cajas nota */
+.note{
+  background:#f7f3f5;border-left:4px solid var(--guinda);
+  border-radius:0 7px 7px 0;padding:.6em .8em;font-size:.78em;
+  color:#5b4a51;margin:.7em 0;
+}
+.source{font-size:.72em;color:var(--plomo-2);border-top:1px dashed #d9dde3;padding-top:.45em;margin-top:.7em;font-style:italic;}
+
+/* dos columnas */
+.two-col{column-count:2;column-gap:1.6em;font-size:.86em;}
+.two-col p{text-align:justify;}
+.def{break-inside:avoid;margin-bottom:.7em;}
+.def b{color:var(--guinda-2);}
+
+/* ============ PORTADA ============ */
+.cover-pg{
+  padding:0 !important;
+  background:
+    radial-gradient(120% 80% at 15% 0%, #8f2a4d 0%, #5c1229 45%, #2b0713 100%);
+  color:#fff;overflow:hidden;
+}
+.cover-pg::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.028) 0 1px, transparent 1px 12px);
+  pointer-events:none;
+}
+.cover-wrap{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:1.9em 2em;z-index:1;}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover-mark{
+  font-family:var(--font-ui);font-weight:700;letter-spacing:.28em;font-size:.82em;
+  border:1px solid rgba(255,255,255,.4);padding:.35em .8em;border-radius:3px;
+}
+.cover-year{
+  font-family:var(--font-display);font-size:2.1em;font-weight:700;line-height:1;
+  color:rgba(255,255,255,.92);
+}
+.cover-center{text-align:left;}
+.cover-eyebrow{
+  font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.34em;
+  font-size:.76em;font-weight:600;color:#e9b8c6;margin-bottom:.7em;
+}
+.cover-pg h1{
+  font-family:var(--font-display);
+  font-size:2.15em;line-height:1.1;font-weight:700;letter-spacing:-.015em;
+  margin:0 0 .55em;color:#fff;
+}
+.cover-line{width:64px;height:3px;background:#e9b8c6;margin-bottom:.85em;border-radius:2px;}
+.cover-sub{font-size:.92em;color:#f2dbe2;max-width:24em;line-height:1.45;margin:0;}
+.cover-foot{
+  display:flex;flex-direction:column;gap:.2em;
+  font-family:var(--font-ui);letter-spacing:.1em;text-transform:uppercase;
+  font-size:.7em;color:#dcb0be;border-top:1px solid rgba(255,255,255,.18);padding-top:.8em;
+}
+
+/* contraportada */
+.back-pg{
+  padding:0 !important;
+  background:radial-gradient(120% 80% at 85% 100%, #7c1d3d 0%, #4a0f22 50%, #240610 100%);
+  color:#fff;
+}
+.back-wrap{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:2em;}
+.back-title{font-family:var(--font-display);font-size:1.5em;line-height:1.2;color:#fff;margin-bottom:.6em;}
+.back-txt{font-size:.82em;color:#e6c8d2;line-height:1.5;}
+.back-tag{
+  display:inline-block;font-family:var(--font-ui);letter-spacing:.22em;text-transform:uppercase;
+  font-size:.68em;border:1px solid rgba(255,255,255,.3);padding:.4em .9em;border-radius:999px;color:#f0d4dc;
+}
+
+/* ============ ÍNDICE ============ */
+.toc{list-style:none;margin:.4em 0 0;padding:0;font-size:.86em;}
+.toc li{margin:0;}
+.toc a{
+  display:flex;align-items:baseline;gap:.5em;
+  padding:.34em 0;color:#39404d;text-decoration:none;border-bottom:1px dotted #d8dbe1;
+  transition:color .2s;
+}
+.toc a:hover{color:var(--guinda);}
+.toc .t-num{font-family:var(--font-ui);font-weight:700;font-size:.92em;color:var(--guinda);min-width:2.1em;}
+.toc .t-txt{flex:1;}
+.toc .t-pg{font-family:var(--font-ui);font-weight:700;color:var(--plomo-2);}
+
+/* ============ CONTROLES ============ */
+.controls{
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  color:#fff;width:min(1180px,96vw);
+}
+button.nav{
+  border:0;cursor:pointer;
+  background:linear-gradient(180deg,#8f2547,#6b1a35);
+  color:#fff;padding:10px 18px;border-radius:999px;
+  font-family:var(--font-ui);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;
+  box-shadow:0 8px 20px rgba(122,31,61,.45), inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .15s, filter .2s, opacity .2s;
+}
+button.nav:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px);}
+button.nav:active:not(:disabled){transform:translateY(0);}
+button.nav:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
+.page-number{
+  min-width:190px;text-align:center;font-family:var(--font-ui);
+  letter-spacing:.14em;font-size:.82rem;text-transform:uppercase;color:#d7dbe2;
+  font-weight:600;
+}
+.progress{width:min(1180px,96vw);height:4px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden;}
+.progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c07a92,#8f2547);border-radius:999px;transition:width .5s ease;}
+
+@media (max-width:880px){
+  .pg{padding:20px 20px 40px;}
+  .kpis{grid-template-columns:repeat(2,1fr);}
+  .donut-block{flex-direction:column;align-items:flex-start;gap:.5em;}
+  .donut{flex:none;width:130px;max-width:130px;}
+  .two-col{column-count:1;}
+  .page-number{min-width:150px;font-size:.76rem;}
+  button.nav{padding:9px 14px;font-size:.74rem;}
+}
+@media (max-width:480px){
+  .pg{font-size:.98em;}
+  .pg h2{font-size:1.35em;}
+  .donuts-3{grid-template-columns:1fr;gap:.2em;}
+  .donuts-3 .donut{width:120px;}
+}
+</style>
+</head>
+<body>
+
+<div class="book" id="book">
+  <div class="book-inner" id="bookInner"></div>
+  <div class="gutter"></div>
+</div>
+
+<div class="progress"><i id="progressBar"></i></div>
+
+<div class="controls">
+  <button class="nav" id="btnPrev">◀ Anterior</button>
+  <div class="page-number" id="pageInfo">Página 1 / 25</div>
+  <button class="nav" id="btnNext">Siguiente ▶</button>
+</div>
+
+<!-- =================== CONTENIDO FUENTE =================== -->
+<div id="source" hidden>
+
+  <!-- 1 PORTADA -->
+  <section class="pg cover-pg" data-nofolio="1">
+    <div class="cover-wrap">
+      <div class="cover-top">
+        <div class="cover-mark">UGEL 07</div>
+        <div class="cover-year">2025</div>
+      </div>
+      <div class="cover-center">
+        <div class="cover-eyebrow">Boletín Estadístico</div>
+        <h1>Sistema Educativo<br>UGEL 07 · San Borja</h1>
+        <div class="cover-line"></div>
+        <p class="cover-sub">Cifras actualizadas del servicio educativo en la jurisdicción. Educación Básica, docentes, servicios, locales escolares y Educación Técnico Productiva.</p>
+      </div>
+      <div class="cover-foot">
+        <span>Unidad de Gestión Educativa Local N.º 07</span>
+        <span>Área de Planificación y Presupuesto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 CRÉDITOS -->
+  <section class="pg">
+    <div class="kicker">Publicación institucional</div>
+    <h2>Créditos</h2>
+    <div class="rule"></div>
+
+    <h3>Dirección</h3>
+    <p class="lead"><strong>Ana Julia Enciso Trujillo</strong><br>
+    Directora de la Unidad de Gestión Educativa Local N.º 07</p>
+
+    <h3>Área responsable de la publicación</h3>
+    <p class="lead">Área de Planificación y Presupuesto</p>
+
+    <h3>Dirección de Sistema Administrativo II</h3>
+    <p class="lead">Econ. John Walter Trujillo Valderrama</p>
+
+    <h3>Equipo de Estadística y Monitoreo</h3>
+    <p class="lead">Mercy Gamboa Ricalde · Nancy Valverde Cribillero · Nathali Falcón Chambilla<br>
+    Godofredo Meza Alpaca · Felipe López Poma · Ronald Tony Bravo Castillo</p>
+
+    <div class="note">
+      <strong>Criterio de actualización:</strong> las cifras de estudiantes de Educación Básica, servicios
+      educativos y locales escolares fueron actualizadas conforme al archivo <strong>DATA.md</strong>. Se
+      conservaron los datos de docentes, evolución histórica, población proyectada, matrícula de ETP y
+      docentes de ETP.
+    </div>
+
+    <div class="source">Fuente: Ministerio de Educación – ESCALE · INEI · DATA.md</div>
+  </section>
+
+  <!-- 3 ÍNDICE -->
+  <section class="pg">
+    <div class="kicker">Contenido</div>
+    <h2>Índice</h2>
+    <div class="rule"></div>
+    <ul class="toc">
+      <li><a href="#" data-goto="4"><span class="t-num">—</span><span class="t-txt">Introducción</span><span class="t-pg">4</span></a></li>
+      <li><a href="#" data-goto="5"><span class="t-num">—</span><span class="t-txt">Glosario de siglas</span><span class="t-pg">5</span></a></li>
+      <li><a href="#" data-goto="6"><span class="t-num">—</span><span class="t-txt">Glosario de términos</span><span class="t-pg">6</span></a></li>
+      <li><a href="#" data-goto="7"><span class="t-num">I</span><span class="t-txt">Magnitudes de la educación en la UGEL 07</span><span class="t-pg">7</span></a></li>
+      <li><a href="#" data-goto="8"><span class="t-num">I</span><span class="t-txt">Contexto demográfico de la jurisdicción</span><span class="t-pg">8</span></a></li>
+      <li><a href="#" data-goto="9"><span class="t-num">1</span><span class="t-txt">Educación Básica · matrícula por gestión</span><span class="t-pg">9</span></a></li>
+      <li><a href="#" data-goto="10"><span class="t-num">1.1</span><span class="t-txt">Evolución histórica de la matrícula</span><span class="t-pg">10</span></a></li>
+      <li><a href="#" data-goto="11"><span class="t-num">1.1</span><span class="t-txt">Matrícula por modalidad educativa</span><span class="t-pg">11</span></a></li>
+      <li><a href="#" data-goto="12"><span class="t-num">1.1</span><span class="t-txt">Educación Básica Regular por nivel</span><span class="t-pg">12</span></a></li>
+      <li><a href="#" data-goto="13"><span class="t-num">1.1</span><span class="t-txt">Educación Básica Especial</span><span class="t-pg">13</span></a></li>
+      <li><a href="#" data-goto="14"><span class="t-num">1.1</span><span class="t-txt">Educación Básica Alternativa</span><span class="t-pg">14</span></a></li>
+      <li><a href="#" data-goto="15"><span class="t-num">1.1</span><span class="t-txt">Matrícula por sexo y distrito</span><span class="t-pg">15</span></a></li>
+      <li><a href="#" data-goto="16"><span class="t-num">1.2</span><span class="t-txt">Docentes en la Educación Básica</span><span class="t-pg">16</span></a></li>
+      <li><a href="#" data-goto="17"><span class="t-num">1.2</span><span class="t-txt">Docentes por modalidad y gestión</span><span class="t-pg">17</span></a></li>
+      <li><a href="#" data-goto="18"><span class="t-num">1.3</span><span class="t-txt">Servicios educativos de la Educación Básica</span><span class="t-pg">18</span></a></li>
+      <li><a href="#" data-goto="19"><span class="t-num">1.3</span><span class="t-txt">Servicios educativos EBR por nivel</span><span class="t-pg">19</span></a></li>
+      <li><a href="#" data-goto="20"><span class="t-num">1.3</span><span class="t-txt">Servicios educativos por distrito</span><span class="t-pg">20</span></a></li>
+      <li><a href="#" data-goto="21"><span class="t-num">1.4</span><span class="t-txt">Locales escolares</span><span class="t-pg">21</span></a></li>
+      <li><a href="#" data-goto="22"><span class="t-num">1.4</span><span class="t-txt">Locales escolares por nivel y distrito</span><span class="t-pg">22</span></a></li>
+      <li><a href="#" data-goto="23"><span class="t-num">2</span><span class="t-txt">Educación Técnico Productiva (ETP)</span><span class="t-pg">23</span></a></li>
+      <li><a href="#" data-goto="24"><span class="t-num">—</span><span class="t-txt">Fuentes y notas finales</span><span class="t-pg">24</span></a></li>
+    </ul>
+  </section>
+
+  <!-- 4 INTRODUCCIÓN -->
+  <section class="pg">
+    <div class="kicker">Presentación</div>
+    <h2>Introducción</h2>
+    <div class="rule"></div>
+    <p class="lead">Esta publicación es elaborada anualmente por el Equipo de Estadística y Monitoreo de la
+    Unidad de Gestión Educativa Local 07 – San Borja (UGEL 07), con el propósito de poner a disposición de la
+    comunidad educativa y de la ciudadanía en general un compendio de información confiable y actualizada
+    sobre la situación del servicio educativo en la jurisdicción.</p>
+
+    <p>El boletín contiene como eje central los indicadores educativos de la jurisdicción, organizados y
+    presentados bajo diversos criterios de desagregación (nivel educativo, modalidad, gestión, distrito, entre
+    otros). Si bien se pone especial énfasis en el año 2025, también se incluye un análisis de la evolución
+    histórica de variables clave, lo que permite observar tendencias, avances y desafíos del sistema educativo
+    en dicho intervalo.</p>
+
+    <p>La información utilizada proviene de fuentes oficiales, como la Unidad de Estadística Educativa del
+    Ministerio de Educación (Minedu), en el marco del Censo Educativo que se desarrolla cada año, y el
+    Instituto Nacional de Estadística e Informática (INEI), a partir de indicadores demográficos y
+    socioeconómicos publicados en la Encuesta Nacional de Hogares (ENAHO).</p>
+
+    <div class="note">
+      <strong>Nota de actualización:</strong> en esta versión se han actualizado las cifras de
+      <strong>estudiantes de Educación Básica</strong>, <strong>servicios educativos</strong> y
+      <strong>locales escolares</strong> conforme al archivo <strong>DATA.md</strong>.
+    </div>
+
+    <p>El contenido de esta publicación es principalmente de carácter cuantitativo y presenta resúmenes y
+    estadísticas descriptivas, así como elementos de análisis e interpretación que contribuyen a la toma de
+    decisiones informadas por parte de directivos, especialistas, docentes, autoridades y otros actores
+    vinculados al sector educación.</p>
+
+    <div class="source">Versión en línea actualizable · Área de Planificación y Presupuesto – UGEL 07</div>
+  </section>
+
+  <!-- 5 SIGLAS -->
+  <section class="pg">
+    <div class="kicker">Referencias</div>
+    <h2>Glosario de siglas</h2>
+    <div class="rule"></div>
+    <table>
+      <thead><tr><th style="width:24%">Sigla</th><th>Significado</th></tr></thead>
+      <tbody>
+        <tr><td>APP</td><td>Área de Planificación y Presupuesto</td></tr>
+        <tr><td>CETPRO</td><td>Centro Técnico Productivo</td></tr>
+        <tr><td>DCN</td><td>Diseño Curricular Nacional</td></tr>
+        <tr><td>EBA</td><td>Educación Básica Alternativa</td></tr>
+        <tr><td>EBE</td><td>Educación Básica Especial</td></tr>
+        <tr><td>EBR</td><td>Educación Básica Regular</td></tr>
+        <tr><td>ECE</td><td>Evaluación Censal de Estudiantes</td></tr>
+        <tr><td>EEM</td><td>Equipo de Estadística y Monitoreo</td></tr>
+        <tr><td>ENAHO</td><td>Encuesta Nacional de Hogares</td></tr>
+        <tr><td>ESCALE</td><td>Sistema de Estadística de Calidad Educativa</td></tr>
+        <tr><td>IIEE</td><td>Instituciones Educativas</td></tr>
+        <tr><td>INEI</td><td>Instituto Nacional de Estadística e Informática</td></tr>
+        <tr><td>MINEDU</td><td>Ministerio de Educación</td></tr>
+        <tr><td>PAT</td><td>Plan Anual de Trabajo</td></tr>
+        <tr><td>PEI</td><td>Proyecto Educativo Institucional</td></tr>
+        <tr><td>PRONOEI</td><td>Programa No Escolarizado de Educación Inicial</td></tr>
+        <tr><td>RIE</td><td>Registro de Instituciones Educativas</td></tr>
+        <tr><td>SIMON</td><td>Sistema de Monitoreo de la Calidad del Servicio Educativo</td></tr>
+        <tr><td>UE</td><td>Unidad Ejecutora</td></tr>
+        <tr><td>UGEL</td><td>Unidad de Gestión Local</td></tr>
+        <tr><td>UMC</td><td>Unidad de Medición de la Calidad Educativa</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6 TÉRMINOS -->
+  <section class="pg">
+    <div class="kicker">Referencias</div>
+    <h2>Glosario de términos</h2>
+    <div class="rule"></div>
+    <div class="two-col">
+      <div class="def"><b>CALIDAD DE LA EDUCACIÓN.</b> Es un nivel óptimo de formación que deben alcanzar las
+      personas para enfrentar los retos del desarrollo humano, ejercer su ciudadanía y continuar aprendiendo
+      durante toda su vida.</div>
+
+      <div class="def"><b>EDUCACIÓN BÁSICA REGULAR.</b> Es la modalidad que abarca los niveles de educación
+      inicial, primaria y secundaria. Está dirigida a los niños y adolescentes que pasan, oportunamente, por el
+      proceso educativo de acuerdo con su evolución física, afectiva y cognitiva desde el momento de su
+      nacimiento.</div>
+
+      <div class="def"><b>EDUCACIÓN BÁSICA ALTERNATIVA.</b> Esta modalidad tiene los mismos objetivos y calidad
+      equivalente a la Educación Básica Regular. Uno de sus principales objetivos es reducir la brecha de
+      personas que no se encuentran en el sistema educativo y la alfabetización, contribuyendo a salir del
+      estado de exclusión en que se encuentran muchos jóvenes en situación de vulnerabilidad económica y
+      social.</div>
+
+      <div class="def"><b>EDUCACIÓN BÁSICA ESPECIAL.</b> Atiende a personas con necesidades educativas
+      especiales, bajo un enfoque inclusivo y con el fin de conseguir su integración en la vida comunitaria y
+      su participación en la sociedad.</div>
+
+      <div class="def"><b>INSTITUCIÓN EDUCATIVA.</b> Instancia de gestión educativa descentralizada a cargo de
+      un director, autorizada o creada por una autoridad competente del sector educación, para brindar uno o
+      más servicios educativos.</div>
+
+      <div class="def"><b>MONITOREO.</b> Proceso de seguimiento sistemático y continuo de levantamiento de
+      datos e información sobre la implementación de las políticas educativas en las IIEE, mediante el trabajo
+      de los actores clave (docentes y directivos).</div>
+    </div>
+  </section>
+
+  <!-- 7 MAGNITUDES -->
+  <section class="pg">
+    <div class="kicker">Capítulo I</div>
+    <h2>Magnitudes de la educación en la UGEL 07</h2>
+    <div class="rule"></div>
+    <p>Este capítulo presenta información estadística respecto a matrícula de estudiantes, personal docente,
+    instituciones educativas y locales escolares, con el fin de establecer un panorama general de la educación
+    en esta unidad de gestión descentralizada.</p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="k-label">Estudiantes EB</div><div class="k-value">214 779</div><div class="k-sub">Actualizado DATA.md</div></div>
+      <div class="kpi"><div class="k-label">Servicios educativos</div><div class="k-value">1 689</div><div class="k-sub">Incluye ETP y PRONOEI</div></div>
+      <div class="kpi"><div class="k-label">Locales escolares</div><div class="k-value">1 052</div><div class="k-sub">Incluye ETP y PRONOEI</div></div>
+      <div class="kpi"><div class="k-label">Docentes EB</div><div class="k-value">16 151</div><div class="k-sub">Dato conservado</div></div>
+      <div class="kpi"><div class="k-label">Estudiantes ETP</div><div class="k-value">7 484</div><div class="k-sub">Dato conservado</div></div>
+      <div class="kpi"><div class="k-label">CETPRO</div><div class="k-value">59</div><div class="k-sub">42 privados · 17 públicos</div></div>
+    </div>
+
+    <p>La jurisdicción de la UGEL 07 está conformada por siete distritos: Barranco, Chorrillos, Miraflores,
+    San Borja, San Luis, Santiago de Surco y Surquillo. Su heterogeneidad socioeconómica y urbana explica en
+    buena medida el comportamiento diferenciado de la matrícula, la oferta privada y la infraestructura
+    educativa disponible.</p>
+
+    <div class="source">Fuente: DATA.md · Ministerio de Educación – ESCALE · INEI, 2025.</div>
+  </section>
+
+  <!-- 8 CONTEXTO DEMOGRÁFICO -->
+  <section class="pg">
+    <div class="kicker">Capítulo I · Contexto</div>
+    <h2>Contexto demográfico</h2>
+    <div class="rule"></div>
+    <p>Según las proyecciones del INEI para este año, los distritos de <strong>Chorrillos y Santiago de
+    Surco</strong> concentran conjuntamente el <strong>63,8 %</strong> de la población total, configurándose
+    como los territorios de mayor peso demográfico. Esta concentración implica una alta demanda de servicios
+    educativos.</p>
+
+    <div class="donut-block">
+      <div class="legend" style="flex:1">
+        <div class="li"><span class="dot" style="background:#5c1229"></span>Chorrillos + Santiago de Surco <b>63,8 %</b></div>
+        <div class="li"><span class="dot" style="background:#8f2a4d"></span>San Borja <b>16,2 %</b></div>
+        <div class="li"><span class="dot" style="background:#b8688a"></span>Surquillo + Miraflores <b>≈ 14 %</b></div>
+        <div class="li"><span class="dot" style="background:#d5a9ba"></span>San Luis + Barranco <b>6 %</b></div>
+      </div>
+    </div>
+
+    <div class="bar-line">
+      <div class="bl-head"><span>Chorrillos + Surco</span><span>63,8 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:63.8%;background:#5c1229"></div></div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>San Borja</span><span>16,2 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:16.2%;background:#8f2a4d"></div></div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>Surquillo + Miraflores</span><span>≈ 14 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:14%;background:#b8688a"></div></div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>San Luis + Barranco</span><span>6 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:6%;background:#d5a9ba"></div></div>
+    </div>
+
+    <p class="small" style="margin-top:.8em">El análisis histórico 2007-2025 evidencia un crecimiento sostenido
+    en Chorrillos y Surco; un crecimiento intermedio en San Borja y Surquillo; y una tendencia de estancamiento
+    o ligera disminución en Miraflores, San Luis y Barranco, asociada a procesos de densificación urbana,
+    migración y cambios en el uso residencial del suelo.</p>
+
+    <div class="source">Fuente: INEI – Perú: Población Total Proyectada al 30 de junio, 2025.</div>
+  </section>
+
+  <!-- 9 EB MATRÍCULA -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1 · Educación Básica</div>
+    <h2>Matrícula según gestión</h2>
+    <div class="rule"></div>
+    <p>En la jurisdicción de la UGEL 07 se registró un total de <strong>214 779 estudiantes matriculados</strong>
+    en Educación Básica. De esta cantidad, <strong>112 414 estudiantes (52,3 %)</strong> optaron por
+    instituciones de gestión privada, mientras que <strong>102 365 (47,7 %)</strong> se matricularon en
+    instituciones públicas.</p>
+
+    <div class="donut-block">
+      <div class="donut" data-priv="52.34" data-pub="47.66" data-center="52,3%" data-sub="Privada"></div>
+      <div class="legend">
+        <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada — <b>112 414</b> · 52,34 %</div>
+        <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública — <b>102 365</b> · 47,66 %</div>
+        <div class="li" style="margin-top:.4em;color:#8a94a3">Total Educación Básica <b>214 779</b></div>
+      </div>
+    </div>
+
+    <table>
+      <thead><tr><th>Gestión</th><th class="num">Estudiantes</th><th class="num">Participación</th></tr></thead>
+      <tbody>
+        <tr><td>Privada</td><td class="num">112 414</td><td class="num">52,34 %</td></tr>
+        <tr><td>Pública</td><td class="num">102 365</td><td class="num">47,66 %</td></tr>
+        <tr class="total"><td>Total</td><td class="num">214 779</td><td class="num">100,00 %</td></tr>
+      </tbody>
+    </table>
+
+    <p class="small">Si bien la diferencia porcentual es pequeña, se observa una mayor concentración en el
+    sector privado, lo que constituye una característica distintiva de esta jurisdicción en comparación con la
+    tendencia nacional, donde predomina la matrícula pública.</p>
+
+    <div class="source">Fuente: DATA.md / Ministerio de Educación – ESCALE – Padrón de Instituciones Educativas, 2025.</div>
+  </section>
+
+  <!-- 10 EVOLUCIÓN -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.1</div>
+    <h2>Evolución histórica de la matrícula</h2>
+    <div class="rule"></div>
+    <p>El comportamiento histórico de la matrícula evidencia una reconfiguración estructural, influenciada por
+    la heterogeneidad socioeconómica y urbana de los distritos que conforman la jurisdicción.</p>
+
+    <p>Durante el periodo <strong>2007-2014</strong>, el sistema educativo local experimentó un traslado
+    sostenido de estudiantes hacia instituciones de gestión privada, asociado a la rápida expansión de una
+    oferta privada altamente diversificada en el territorio. En consecuencia, el sector privado alcanzó en
+    2014 su máxima participación histórica, con <strong>57,1 %</strong> de la matrícula.</p>
+
+    <div class="kpis" style="grid-template-columns:1fr 1fr">
+      <div class="kpi" style="border-left-color:#8a94a3">
+        <div class="k-label">Máximo histórico privado · 2014</div>
+        <div class="k-value">57,1 %</div>
+        <div class="k-sub">Punto más crítico de la escuela pública</div>
+      </div>
+      <div class="kpi">
+        <div class="k-label">Participación privada · 2025</div>
+        <div class="k-value">52,3 %</div>
+        <div class="k-sub">Recuperación pública de 4,8 p.p.</div>
+      </div>
+    </div>
+
+    <p>A partir de 2015, la gestión pública inició una recuperación progresiva, impulsada por intervenciones
+    orientadas a la mejora y modernización de la infraestructura. Posteriormente, este cambio de tendencia se
+    aceleró a raíz del impacto de la pandemia del COVID-19: la contracción económica afectó a los sectores
+    medios urbanos y detonó un proceso de migración escolar desde colegios privados hacia instituciones
+    educativas públicas.</p>
+
+    <p>Para el año 2025, una vez estabilizados los niveles pospandemia, la oferta estatal concentra el
+    <strong>47,7 %</strong> de la matrícula total de Educación Básica. Este avance representa una recuperación
+    directa de <strong>4,8 puntos porcentuales</strong> respecto al nivel más bajo registrado en 2014.</p>
+
+    <div class="source">Fuente: Boletín UGEL 07 2025 · ESCALE – Magnitudes de la Educación.</div>
+  </section>
+
+  <!-- 11 MODALIDAD -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.1</div>
+    <h2>Matrícula por modalidad educativa</h2>
+    <div class="rule"></div>
+    <p>Del total de <strong>214 779 estudiantes</strong> identificados en el territorio, la gran mayoría se
+    concentra en la EBR con <strong>206 937 estudiantes (96,3 %)</strong>; le sigue la EBA con
+    <strong>5 896 (2,7 %)</strong> y la EBE con <strong>1 946 (0,9 %)</strong>.</p>
+
+    <div class="bar-line">
+      <div class="bl-head"><span>EBR — Educación Básica Regular</span><span>96,35 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:96.35%;background:var(--guinda)"></div></div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>EBA — Educación Básica Alternativa</span><span>2,74 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:2.74%;background:#b8688a"></div></div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>EBE — Educación Básica Especial</span><span>0,91 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:0.91%;background:#d5a9ba"></div></div>
+    </div>
+
+    <table style="margin-top:.9em">
+      <thead>
+        <tr><th>Modalidad</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th><th class="num">% EB</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EBR</td><td class="num">110 806</td><td class="num">96 131</td><td class="num">206 937</td><td class="num">96,35 %</td></tr>
+        <tr><td>EBA</td><td class="num">1 258</td><td class="num">4 638</td><td class="num">5 896</td><td class="num">2,74 %</td></tr>
+        <tr><td>EBE</td><td class="num">350</td><td class="num">1 596</td><td class="num">1 946</td><td class="num">0,91 %</td></tr>
+        <tr class="total"><td>Total</td><td class="num">112 414</td><td class="num">102 365</td><td class="num">214 779</td><td class="num">100,00 %</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">En EBR la distribución es cercana al equilibrio (53,6 % privada / 46,4 % pública). En EBA
+    y EBE predomina ampliamente el sector público: 78,7 % y 82,0 % respectivamente.</div>
+
+    <div class="source">Fuente: DATA.md – Estudiantes por modalidad y gestión.</div>
+  </section>
+
+  <!-- 12 EBR NIVELES -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.1</div>
+    <h2>Educación Básica Regular por nivel</h2>
+    <div class="rule"></div>
+    <p>La mayor población estudiantil se concentra en <strong>primaria</strong>, con
+    <strong>88 233 estudiantes</strong>; seguida de <strong>secundaria</strong>, con
+    <strong>79 804</strong>; mientras que en <strong>inicial</strong> la cifra asciende a
+    <strong>38 900</strong>, incluyendo PRONOEI.</p>
+
+    <div class="donuts-3">
+      <div class="donut" data-priv="52.04" data-pub="47.96" data-center="52,0%" data-sub="Privada"></div>
+      <div class="donut" data-priv="53.96" data-pub="46.04" data-center="54,0%" data-sub="Privada"></div>
+      <div class="donut" data-priv="53.82" data-pub="46.18" data-center="53,8%" data-sub="Privada"></div>
+    </div>
+    <div class="legend" style="flex-direction:row;gap:1em;justify-content:space-between;font-size:.74em">
+      <span>Inicial · 38 900</span><span>Primaria · 88 233</span><span>Secundaria · 79 804</span>
+    </div>
+    <div class="legend" style="flex-direction:row;gap:1.2em;margin-top:.55em">
+      <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada</div>
+      <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública</div>
+    </div>
+
+    <table style="margin-top:.7em">
+      <thead>
+        <tr><th>Nivel / Programa</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th><th class="num">% Priv.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Inicial – Cuna-Jardín</td><td class="num">8 294</td><td class="num">7 914</td><td class="num">16 208</td><td class="num">51,17 %</td></tr>
+        <tr><td>Inicial – Jardín</td><td class="num">11 949</td><td class="num">9 128</td><td class="num">21 077</td><td class="num">56,69 %</td></tr>
+        <tr><td>PRONOEI</td><td class="num">0</td><td class="num">1 615</td><td class="num">1 615</td><td class="num">0,00 %</td></tr>
+        <tr><td>Primaria</td><td class="num">47 614</td><td class="num">40 619</td><td class="num">88 233</td><td class="num">53,96 %</td></tr>
+        <tr><td>Secundaria</td><td class="num">42 949</td><td class="num">36 855</td><td class="num">79 804</td><td class="num">53,82 %</td></tr>
+        <tr class="total"><td>Total EBR</td><td class="num">110 806</td><td class="num">96 131</td><td class="num">206 937</td><td class="num">53,55 %</td></tr>
+      </tbody>
+    </table>
+
+    <div class="source">Fuente: DATA.md – Estudiantes por modalidad, gestión y subnivel.</div>
+  </section>
+
+  <!-- 13 EBE -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.1</div>
+    <h2>Educación Básica Especial</h2>
+    <div class="rule"></div>
+    <p>En la Educación Básica Especial la matrícula total asciende a <strong>1 946 estudiantes</strong>.
+    EBE Inicial concentra <strong>319 estudiantes</strong>, EBE Primaria <strong>1 364</strong> y los
+    Programas de Intervención Temprana (PRITE) atienden a <strong>263</strong> estudiantes.</p>
+
+    <div class="donut-block">
+      <div class="donut" data-priv="17.99" data-pub="82.01" data-center="82,0%" data-sub="Pública"></div>
+      <div class="legend">
+        <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada — <b>350</b> · 17,99 %</div>
+        <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública — <b>1 596</b> · 82,01 %</div>
+        <div class="li" style="margin-top:.4em;color:#8a94a3">Total EBE <b>1 946</b></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Nivel / Programa</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EBE Inicial</td><td class="num">72</td><td class="num">247</td><td class="num">319</td></tr>
+        <tr><td>EBE Primaria</td><td class="num">278</td><td class="num">1 086</td><td class="num">1 364</td></tr>
+        <tr><td>PRITE</td><td class="num">0</td><td class="num">263</td><td class="num">263</td></tr>
+        <tr class="total"><td>Total EBE</td><td class="num">350</td><td class="num">1 596</td><td class="num">1 946</td></tr>
+      </tbody>
+    </table>
+
+    <p class="small">Los PRITE atienden su matrícula de manera exclusiva en instituciones de gestión pública,
+    lo que refuerza el rol del Estado en la atención temprana de la primera infancia con discapacidad.</p>
+
+    <div class="source">Fuente: DATA.md – Estudiantes por modalidad, gestión y subnivel.</div>
+  </section>
+
+  <!-- 14 EBA -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.1</div>
+    <h2>Educación Básica Alternativa</h2>
+    <div class="rule"></div>
+    <p>La EBA representa una forma de inclusión y continuidad educativa, atendiendo a un total de
+    <strong>5 896 estudiantes</strong>. El ciclo <strong>Avanzado</strong> alberga a
+    <strong>5 468 matriculados (92,7 %)</strong>, mientras que el ciclo <strong>Inicial–Intermedio</strong>
+    registra <strong>428 participantes (7,3 %)</strong>.</p>
+
+    <div class="donut-block">
+      <div class="donut" data-priv="21.34" data-pub="78.66" data-center="78,7%" data-sub="Pública"></div>
+      <div class="legend">
+        <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada — <b>1 258</b> · 21,34 %</div>
+        <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública — <b>4 638</b> · 78,66 %</div>
+        <div class="li" style="margin-top:.4em;color:#8a94a3">Total EBA <b>5 896</b></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Ciclo</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th><th class="num">% Púb.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Avanzado</td><td class="num">1 247</td><td class="num">4 221</td><td class="num">5 468</td><td class="num">77,19 %</td></tr>
+        <tr><td>Inicial e Intermedio</td><td class="num">11</td><td class="num">417</td><td class="num">428</td><td class="num">97,43 %</td></tr>
+        <tr class="total"><td>Total EBA</td><td class="num">1 258</td><td class="num">4 638</td><td class="num">5 896</td><td class="num">78,66 %</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">El sector público asume una mayoría en ambos ciclos, alcanzando el 97,4 % en el ciclo
+    Inicial–Intermedio, orientado a la alfabetización y consolidación de competencias básicas.</div>
+
+    <div class="source">Fuente: DATA.md – Estudiantes por modalidad, gestión y subnivel.</div>
+  </section>
+
+  <!-- 15 SEXO Y DISTRITO -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.1</div>
+    <h2>Matrícula por sexo y distrito</h2>
+    <div class="rule"></div>
+    <p>La distribución por sexo es prácticamente equilibrada: <strong>107 624 hombres (50,1 %)</strong> y
+    <strong>107 155 mujeres (49,9 %)</strong>.</p>
+
+    <div class="bar-line">
+      <div class="bl-head"><span>Hombres</span><span>50,1 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:50.1%;background:var(--azulino)"></div></div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>Mujeres</span><span>49,9 %</span></div>
+      <div class="bar-track"><div class="bar-seg" style="width:49.9%;background:var(--rojizo)"></div></div>
+    </div>
+
+    <table style="margin-top:.8em">
+      <thead>
+        <tr><th>Distrito</th><th class="num">Hombre</th><th class="num">Mujer</th><th class="num">Total</th><th class="num">% del total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Barranco</td><td class="num">7 040</td><td class="num">8 066</td><td class="num">15 106</td><td class="num">7,03 %</td></tr>
+        <tr><td>Chorrillos</td><td class="num">38 590</td><td class="num">36 922</td><td class="num">75 512</td><td class="num">35,16 %</td></tr>
+        <tr><td>Miraflores</td><td class="num">9 662</td><td class="num">12 993</td><td class="num">22 655</td><td class="num">10,55 %</td></tr>
+        <tr><td>San Borja</td><td class="num">7 658</td><td class="num">7 314</td><td class="num">14 972</td><td class="num">6,97 %</td></tr>
+        <tr><td>San Luis</td><td class="num">6 700</td><td class="num">6 421</td><td class="num">13 121</td><td class="num">6,11 %</td></tr>
+        <tr><td>Santiago de Surco</td><td class="num">31 739</td><td class="num">29 502</td><td class="num">61 241</td><td class="num">28,51 %</td></tr>
+        <tr><td>Surquillo</td><td class="num">6 235</td><td class="num">5 937</td><td class="num">12 172</td><td class="num">5,67 %</td></tr>
+        <tr class="total"><td>Total</td><td class="num">107 624</td><td class="num">107 155</td><td class="num">214 779</td><td class="num">100,00 %</td></tr>
+      </tbody>
+    </table>
+
+    <div class="source">Fuente: DATA.md – Estudiantes por distrito y género.</div>
+  </section>
+
+  <!-- 16 DOCENTES -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.2</div>
+    <h2>Docentes en la Educación Básica</h2>
+    <div class="rule"></div>
+    <p>La UGEL 07 cuenta con una población docente de <strong>16 151 profesionales en actividad</strong>.</p>
+    <p>Se observa un marcado predominio del sector privado, que concentra al <strong>63 %</strong> de la fuerza
+    docente de la jurisdicción con <strong>10 214 maestros</strong>. Por su parte, la escuela pública alberga
+    al <strong>37 %</strong> restante, equivalente a <strong>5 937 docentes</strong> en servicio activo.</p>
+
+    <div class="donut-block">
+      <div class="donut" data-priv="63.24" data-pub="36.76" data-center="63,2%" data-sub="Privada"></div>
+      <div class="legend">
+        <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada — <b>10 214</b> · 63,24 %</div>
+        <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública — <b>5 937</b> · 36,76 %</div>
+        <div class="li" style="margin-top:.4em;color:#8a94a3">Total docentes EB <b>16 151</b></div>
+      </div>
+    </div>
+
+    <div class="note">Corresponde a la suma del número de personas que desempeñan labor docente, directiva o en
+    el aula, en cada institución educativa, sin diferenciar si la jornada es de tiempo completo o parcial.</div>
+
+    <div class="source">Fuente: Boletín UGEL 07 2025 / Ministerio de Educación – ESCALE.</div>
+  </section>
+
+  <!-- 17 DOCENTES POR MODALIDAD -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.2</div>
+    <h2>Docentes por modalidad y gestión</h2>
+    <div class="rule"></div>
+    <p>La mayor proporción de personal docente corresponde a la Educación Básica Regular, con
+    <strong>15 404 docentes</strong>. La Educación Básica Especial cuenta con <strong>364 docentes</strong> y
+    la Educación Básica Alternativa con <strong>413 docentes</strong>.</p>
+
+    <table>
+      <thead>
+        <tr><th>Modalidad</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EBR</td><td class="num">9 982</td><td class="num">5 422</td><td class="num">15 404</td></tr>
+        <tr><td>EBE</td><td class="num">98</td><td class="num">266</td><td class="num">364</td></tr>
+        <tr><td>EBA</td><td class="num">139</td><td class="num">274</td><td class="num">413</td></tr>
+        <tr class="total"><td>Total Educación Básica</td><td class="num">10 214</td><td class="num">5 937</td><td class="num">16 151</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Detalle por nivel / ciclo</h3>
+    <ul class="small">
+      <li><strong>EBR:</strong> secundaria 60 % privada / 40 % pública; primaria 65 % / 35 %; inicial 71 % / 29 %.</li>
+      <li><strong>EBE:</strong> inicial 28 % privada / 72 % pública; primaria 27 % / 73 %.</li>
+      <li><strong>EBA:</strong> ciclo Inicial–Intermedio 44 % privada / 56 % pública; ciclo Avanzado 31 % / 69 %.</li>
+    </ul>
+
+    <div class="note">1/ Excluye promotoras educativas comunitarias a cargo de programas no escolarizados.</div>
+    <div class="source">Fuente: Boletín UGEL 07 2025 / ESCALE – Magnitudes de la Educación.</div>
+  </section>
+
+  <!-- 18 SERVICIOS -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.3</div>
+    <h2>Servicios educativos de la Educación Básica</h2>
+    <div class="rule"></div>
+    <p>La UGEL 07 – San Borja registra <strong>1 689 servicios educativos activos</strong>, incluyendo ETP y
+    PRONOEI, de los cuales el <strong>71,8 % (1 213)</strong> pertenecen al sector privado y el
+    <strong>28,2 % (476)</strong> al sector público.</p>
+
+    <div class="donut-block">
+      <div class="donut" data-priv="71.82" data-pub="28.18" data-center="71,8%" data-sub="Privada"></div>
+      <div class="legend">
+        <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada — <b>1 213</b> · 71,82 %</div>
+        <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública — <b>476</b> · 28,18 %</div>
+        <div class="li" style="margin-top:.4em;color:#8a94a3">Total servicios <b>1 689</b></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Nivel / Modalidad</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EBA</td><td class="num">39</td><td class="num">36</td><td class="num">75</td></tr>
+        <tr><td>EBE</td><td class="num">22</td><td class="num">23</td><td class="num">45</td></tr>
+        <tr><td>EBR</td><td class="num">1 110</td><td class="num">400</td><td class="num">1 510</td></tr>
+        <tr><td>ETP</td><td class="num">42</td><td class="num">17</td><td class="num">59</td></tr>
+        <tr class="total"><td>Total general</td><td class="num">1 213</td><td class="num">476</td><td class="num">1 689</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">Incluye IIEE activas escolarizadas y no escolarizadas; incluye CETPRO y PRONOEI. Si se
+    excluye ETP, la Educación Básica concentra 1 630 servicios: 1 171 privados y 459 públicos.</div>
+
+    <div class="source">Fuente: DATA.md – Recuento de servicios educativos.</div>
+  </section>
+
+  <!-- 19 SERVICIOS EBR -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.3</div>
+    <h2>Servicios educativos EBR por nivel</h2>
+    <div class="rule"></div>
+    <p>En la Educación Básica Regular se registraron <strong>1 510 servicios educativos</strong>, predominando
+    ampliamente las instituciones privadas con el <strong>73,5 % (1 110)</strong>, mientras que las públicas
+    representaron el <strong>26,5 % (400)</strong>.</p>
+
+    <table>
+      <thead>
+        <tr><th>Nivel / Programa</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th><th class="num">% Priv.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Inicial</td><td class="num">545</td><td class="num">95</td><td class="num">640</td><td class="num">85,16 %</td></tr>
+        <tr><td>Primaria</td><td class="num">338</td><td class="num">80</td><td class="num">418</td><td class="num">80,86 %</td></tr>
+        <tr><td>Secundaria</td><td class="num">227</td><td class="num">58</td><td class="num">285</td><td class="num">79,65 %</td></tr>
+        <tr><td>PRONOEI</td><td class="num">0</td><td class="num">167</td><td class="num">167</td><td class="num">0,00 %</td></tr>
+        <tr class="total"><td>Total EBR</td><td class="num">1 110</td><td class="num">400</td><td class="num">1 510</td><td class="num">73,51 %</td></tr>
+      </tbody>
+    </table>
+
+    <div class="bar-line">
+      <div class="bl-head"><span>Inicial</span><span>85,2 % privada</span></div>
+      <div class="bar-track">
+        <div class="bar-seg priv" style="width:85.16%"></div><div class="bar-seg pub" style="width:14.84%"></div>
+      </div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>Primaria</span><span>80,9 % privada</span></div>
+      <div class="bar-track">
+        <div class="bar-seg priv" style="width:80.86%"></div><div class="bar-seg pub" style="width:19.14%"></div>
+      </div>
+    </div>
+    <div class="bar-line">
+      <div class="bl-head"><span>Secundaria</span><span>79,7 % privada</span></div>
+      <div class="bar-track">
+        <div class="bar-seg priv" style="width:79.65%"></div><div class="bar-seg pub" style="width:20.35%"></div>
+      </div>
+    </div>
+
+    <div class="legend" style="flex-direction:row;gap:1.2em;margin-top:.6em">
+      <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada</div>
+      <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública</div>
+    </div>
+
+    <div class="source">Fuente: DATA.md – Servicios educativos detallado por subniveles.</div>
+  </section>
+
+  <!-- 20 SERVICIOS DISTRITO -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.3</div>
+    <h2>Servicios educativos por distrito</h2>
+    <div class="rule"></div>
+    <p>Chorrillos es el distrito con mayor número de servicios (<strong>596</strong>), seguido de Santiago de
+    Surco (<strong>506</strong>). Miraflores presenta la mayor participación relativa del sector privado
+    (<strong>83,9 %</strong>), mientras que Barranco es el distrito con mayor equilibrio entre gestión privada
+    y pública.</p>
+
+    <table>
+      <thead>
+        <tr><th>Distrito</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th><th class="num">% Priv.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Barranco</td><td class="num">45</td><td class="num">42</td><td class="num">87</td><td class="num">51,72 %</td></tr>
+        <tr><td>Chorrillos</td><td class="num">407</td><td class="num">189</td><td class="num">596</td><td class="num">68,29 %</td></tr>
+        <tr><td>Miraflores</td><td class="num">120</td><td class="num">23</td><td class="num">143</td><td class="num">83,92 %</td></tr>
+        <tr><td>San Borja</td><td class="num">100</td><td class="num">27</td><td class="num">127</td><td class="num">78,74 %</td></tr>
+        <tr><td>San Luis</td><td class="num">74</td><td class="num">51</td><td class="num">125</td><td class="num">59,20 %</td></tr>
+        <tr><td>Santiago de Surco</td><td class="num">397</td><td class="num">109</td><td class="num">506</td><td class="num">78,46 %</td></tr>
+        <tr><td>Surquillo</td><td class="num">70</td><td class="num">35</td><td class="num">105</td><td class="num">66,67 %</td></tr>
+        <tr class="total"><td>Total</td><td class="num">1 213</td><td class="num">476</td><td class="num">1 689</td><td class="num">71,82 %</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">DATA.md no desagrega servicios por distrito y modalidad simultáneamente; se presenta el
+    total distrital incluyendo EBA, EBE, EBR, ETP y PRONOEI.</div>
+
+    <div class="source">Fuente: DATA.md – Recuento de servicios educativos por distrito.</div>
+  </section>
+
+  <!-- 21 LOCALES -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.4</div>
+    <h2>Locales escolares</h2>
+    <div class="rule"></div>
+    <p>La UGEL N.º 07 – San Borja cuenta con un total de <strong>1 052 locales educativos activos</strong>, de
+    los cuales <strong>723 corresponden a la gestión privada (68,7 %)</strong> y <strong>330 a la gestión
+    pública (31,3 %)</strong>. Este indicador incluye ETP y PRONOEI.</p>
+
+    <div class="donut-block">
+      <div class="donut" data-priv="68.73" data-pub="31.27" data-center="68,7%" data-sub="Privada"></div>
+      <div class="legend">
+        <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada — <b>723</b> · 68,73 %</div>
+        <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública — <b>330</b> · 31,27 %</div>
+        <div class="li" style="margin-top:.4em;color:#8a94a3">Total locales <b>1 052</b></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Nivel / Modalidad</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EBA</td><td class="num">24</td><td class="num">18</td><td class="num">42</td></tr>
+        <tr><td>EBE</td><td class="num">13</td><td class="num">12</td><td class="num">25</td></tr>
+        <tr><td>EBR</td><td class="num">660</td><td class="num">308</td><td class="num">968</td></tr>
+        <tr><td>ETP</td><td class="num">42</td><td class="num">17</td><td class="num">59</td></tr>
+        <tr class="total"><td>Total general</td><td class="num">723</td><td class="num">330</td><td class="num">1 052</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">Si se excluye Educación Técnico Productiva, la Educación Básica concentra 993 locales:
+    681 privados y 313 públicos.</div>
+
+    <div class="source">Fuente: DATA.md – Recuento distinto de locales escolares.</div>
+  </section>
+
+  <!-- 22 LOCALES DETALLE -->
+  <section class="pg">
+    <div class="kicker">Capítulo 1.4</div>
+    <h2>Locales por nivel y distrito</h2>
+    <div class="rule"></div>
+
+    <h3>Educación Básica Regular por nivel</h3>
+    <table>
+      <thead>
+        <tr><th>Nivel / Programa</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Inicial</td><td class="num">545</td><td class="num">94</td><td class="num">639</td></tr>
+        <tr><td>Primaria</td><td class="num">338</td><td class="num">79</td><td class="num">417</td></tr>
+        <tr><td>Secundaria</td><td class="num">227</td><td class="num">57</td><td class="num">284</td></tr>
+        <tr><td>PRONOEI</td><td class="num">0</td><td class="num">167</td><td class="num">167</td></tr>
+        <tr class="total"><td>Total EBR</td><td class="num">660</td><td class="num">308</td><td class="num">968</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Locales por distrito</h3>
+    <table>
+      <thead>
+        <tr><th>Distrito</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th><th class="num">% Priv.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Barranco</td><td class="num">23</td><td class="num">23</td><td class="num">46</td><td class="num">50,00 %</td></tr>
+        <tr><td>Chorrillos</td><td class="num">227</td><td class="num">136</td><td class="num">362</td><td class="num">62,71 %</td></tr>
+        <tr><td>Miraflores</td><td class="num">80</td><td class="num">14</td><td class="num">94</td><td class="num">85,11 %</td></tr>
+        <tr><td>San Borja</td><td class="num">67</td><td class="num">14</td><td class="num">81</td><td class="num">82,72 %</td></tr>
+        <tr><td>San Luis</td><td class="num">42</td><td class="num">37</td><td class="num">79</td><td class="num">53,16 %</td></tr>
+        <tr><td>Santiago de Surco</td><td class="num">237</td><td class="num">82</td><td class="num">319</td><td class="num">74,30 %</td></tr>
+        <tr><td>Surquillo</td><td class="num">47</td><td class="num">24</td><td class="num">71</td><td class="num">66,20 %</td></tr>
+        <tr class="total"><td>Total</td><td class="num">723</td><td class="num">330</td><td class="num">1 052</td><td class="num">68,73 %</td></tr>
+      </tbody>
+    </table>
+
+    <div class="source">Fuente: DATA.md – Recuento distinto de locales escolares por nivel y distrito.</div>
+  </section>
+
+  <!-- 23 ETP -->
+  <section class="pg">
+    <div class="kicker">Capítulo II</div>
+    <h2>Educación Técnico Productiva</h2>
+    <div class="rule"></div>
+    <p>La ETP es una modalidad orientada a fortalecer el desempeño laboral, la empleabilidad y el desarrollo
+    personal. Su finalidad es la formación en competencias laborales y empresariales que faciliten la
+    inserción, permanencia y mejora en el mercado de trabajo.</p>
+
+    <div class="donuts-3">
+      <div class="donut" data-priv="67.22" data-pub="32.78" data-center="67,2%" data-sub="Privada"></div>
+      <div class="donut" data-priv="40.44" data-pub="59.56" data-center="59,6%" data-sub="Pública"></div>
+      <div class="donut" data-priv="71.19" data-pub="28.81" data-center="71,2%" data-sub="Privada"></div>
+    </div>
+    <div class="legend" style="flex-direction:row;gap:1em;justify-content:space-between;font-size:.74em">
+      <span>Matrícula · 7 484</span><span>Docentes · 319</span><span>CETPRO · 59</span>
+    </div>
+    <div class="legend" style="flex-direction:row;gap:1.2em;margin-top:.55em">
+      <div class="li"><span class="dot" style="background:var(--azulino)"></span>Privada</div>
+      <div class="li"><span class="dot" style="background:var(--rojizo)"></span>Pública</div>
+    </div>
+
+    <table style="margin-top:.8em">
+      <thead><tr><th>Indicador ETP</th><th class="num">Privada</th><th class="num">Pública</th><th class="num">Total</th></tr></thead>
+      <tbody>
+        <tr><td>Estudiantes matriculados</td><td class="num">5 031</td><td class="num">2 453</td><td class="num">7 484</td></tr>
+        <tr><td>Docentes</td><td class="num">129</td><td class="num">190</td><td class="num">319</td></tr>
+        <tr><td>CETPRO</td><td class="num">42</td><td class="num">17</td><td class="num">59</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">La matrícula y los docentes de ETP se conservan del boletín original porque DATA.md no
+    incluye estudiantes de esta modalidad.</div>
+
+    <div class="source">Fuentes: DATA.md para servicios y CETPRO; boletín original para matrícula y docentes de ETP.</div>
+  </section>
+
+  <!-- 24 FUENTES -->
+  <section class="pg">
+    <div class="kicker">Anexos</div>
+    <h2>Fuentes y notas finales</h2>
+    <div class="rule"></div>
+    <ul class="small">
+      <li>Ministerio de Educación – ESCALE – Padrón de Instituciones Educativas, 2025.
+      <span style="color:#8a94a3">http://escale.minedu.gob.pe/uee</span></li>
+      <li>Ministerio de Educación – ESCALE – Magnitudes de la Educación, 2025.
+      <span style="color:#8a94a3">http://escale.minedu.gob.pe/magnitudes</span></li>
+      <li>DATA.md – Recuentos actualizados de servicios educativos, locales escolares y estudiantes por
+      gestión, modalidad, subnivel, distrito y género.</li>
+      <li>Instituto Nacional de Estadística e Informática (INEI). Perú: Población Total Proyectada al 30 de
+      junio de cada año, según Departamento, Provincia y Distrito, 2025.</li>
+      <li>DRELM. (2015). <em>Lima en Cifras</em>. Lima: Dirección Regional de Educación de Lima Metropolitana.</li>
+      <li>DRELM. (2016). <em>Diseño e implementación del Sistema de Monitoreo y Evaluación de la Calidad del
+      Servicio Educativo</em>. Lima: DRELM.</li>
+    </ul>
+
+    <div class="note">
+      <strong>Criterio de actualización aplicado</strong>
+      <ul style="margin-bottom:0">
+        <li>Se reemplazaron las cifras de estudiantes de Educación Básica por las de DATA.md.</li>
+        <li>Se reemplazaron los totales de servicios educativos y locales escolares por los de DATA.md.</li>
+        <li>Se conservaron docentes, evolución histórica, población, matrícula ETP y docentes ETP.</li>
+        <li>Cuando DATA.md incluye ETP, se señala explícitamente; también se presenta el subtotal de Educación
+        Básica excluyendo ETP cuando resulta pertinente.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 25 CONTRAPORTADA -->
+  <section class="pg back-pg" data-nofolio="1">
+    <div class="back-wrap">
+      <div>
+        <div class="back-tag">UGEL 07 · San Borja</div>
+        <h2 class="back-title" style="margin-top:1em">Boletín Estadístico del Sistema Educativo 2025</h2>
+        <p class="back-txt">Un instrumento de consulta y apoyo para la gestión educativa, orientado a
+        identificar fortalezas y brechas, así como a sustentar políticas y estrategias que promuevan una mejora
+        continua de la calidad del servicio educativo en la jurisdicción.</p>
+      </div>
+      <div>
+        <div style="height:3px;width:64px;background:#e9b8c6;border-radius:2px;margin-bottom:1em"></div>
+        <p class="back-txt" style="font-size:.76em">
+          Unidad de Gestión Educativa Local N.º 07<br>
+          Área de Planificación y Presupuesto<br>
+          Equipo de Estadística y Monitoreo
+        </p>
+        <p class="back-txt" style="font-size:.7em;color:#c99cad;margin-top:1.4em">
+          Fuentes: Ministerio de Educación – ESCALE · INEI · DATA.md
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- DONAS ---------- */
+  function renderDonuts(root){
+    root.querySelectorAll('.donut[data-priv]').forEach(function(el){
+      var priv = parseFloat(el.dataset.priv) || 0;
+      var pub  = parseFloat(el.dataset.pub)  || 0;
+      var C = 2 * Math.PI * 78;
+      var aP = C * priv / 100;
+      var aU = C * pub  / 100;
+      var center = el.dataset.center || (priv.toFixed(1).replace('.', ',') + '%');
+      var sub = el.dataset.sub || 'Privada';
+      el.innerHTML =
+        '<svg viewBox="0 0 200 200" role="img" aria-label="' + center + ' ' + sub + '">' +
+          '<circle cx="100" cy="100" r="78" fill="none" stroke="#eceef1" stroke-width="24"/>' +
+          '<circle cx="100" cy="100" r="78" fill="none" stroke="var(--azulino)" stroke-width="24" ' +
+            'stroke-dasharray="' + aP + ' ' + (C - aP) + '" stroke-dashoffset="0" ' +
+            'transform="rotate(-90 100 100)"/>' +
+          '<circle cx="100" cy="100" r="78" fill="none" stroke="var(--rojizo)" stroke-width="24" ' +
+            'stroke-dasharray="' + aU + ' ' + (C - aU) + '" stroke-dashoffset="' + (-aP) + '" ' +
+            'transform="rotate(-90 100 100)"/>' +
+          '<text class="d-center" x="100" y="97" text-anchor="middle">' + center + '</text>' +
+          '<text class="d-sub" x="100" y="122" text-anchor="middle">' + sub + '</text>' +
+        '</svg>';
+    });
+  }
+
+  /* ---------- LIBRO ---------- */
+  var source   = document.getElementById('source');
+  var pageEls  = Array.prototype.slice.call(source.querySelectorAll('.pg'));
+  var TOTAL    = pageEls.length;
+  var book     = document.getElementById('book');
+  var inner    = document.getElementById('bookInner');
+  var info     = document.getElementById('pageInfo');
+  var btnPrev  = document.getElementById('btnPrev');
+  var btnNext  = document.getElementById('btnNext');
+  var bar      = document.getElementById('progressBar');
+
+  var leaves = [];
+  var current = 0;
+  var isSpread = true;
+  var busy = false;
+
+  function spreadMode(){
+    return window.innerWidth >= 880 && window.innerHeight >= 480;
+  }
+
+  function makeFace(pageEl, side, idx){
+    var face = document.createElement('div');
+    face.className = 'face ' + side;
+    if (pageEl){
+      face.appendChild(pageEl);
+      if (!pageEl.hasAttribute('data-nofolio')){
+        var f = document.createElement('div');
+        f.className = 'folio';
+        f.textContent = idx + 1;
+        face.appendChild(f);
+      }
+    }
+    return face;
+  }
+
+  function currentPageNumber(){
+    if (isSpread) return current === 0 ? 1 : Math.min(2 * current, TOTAL);
+    return current + 1;
+  }
+
+  function build(){
+    var keepPage = currentPageNumber();
+    isSpread = spreadMode();
+    book.classList.toggle('single', !isSpread);
+
+    inner.innerHTML = '';
+    leaves = [];
+    pageEls.forEach(function(p){ if (p.parentNode) p.parentNode.removeChild(p); });
+
+    if (isSpread){
+      for (var i = 0; i < pageEls.length; i += 2){
+        var leaf = document.createElement('div');
+        leaf.className = 'leaf';
+        leaf.appendChild(makeFace(pageEls[i], 'front', i));
+        leaf.appendChild(makeFace(pageEls[i + 1] || null, 'back', i + 1));
+        inner.appendChild(leaf);
+        leaves.push(leaf);
+      }
+    } else {
+      pageEls.forEach(function(p, i){
+        var leaf = document.createElement('div');
+        leaf.className = 'leaf';
+        leaf.appendChild(makeFace(p, 'front', i));
+        var b = document.createElement('div');
+        b.className = 'face back';
+        leaf.appendChild(b);
+        inner.appendChild(leaf);
+        leaves.push(leaf);
+      });
+    }
+
+    current = 0;
+    applyZ();
+    jumpToPage(keepPage, true);
+  }
+
+  function applyZ(){
+    leaves.forEach(function(leaf, i){
+      leaf.classList.toggle('flipped', i < current);
+      leaf.style.zIndex = (i < current) ? (500 + i) : (leaves.length - i);
+    });
+  }
+
+  function updateInfo(){
+    if (isSpread){
+      if (current === 0){
+        info.textContent = 'Portada · 1 / ' + TOTAL;
+      } else {
+        var l = 2 * current, r = 2 * current + 1;
+        info.textContent = (r <= TOTAL)
+          ? 'Páginas ' + l + '–' + r + ' de ' + TOTAL
+          : 'Página ' + l + ' de ' + TOTAL;
+      }
+    } else {
+      info.textContent = 'Página ' + (current + 1) + ' de ' + TOTAL;
+    }
+    btnPrev.disabled = (current === 0);
+    btnNext.disabled = (current === leaves.length);
+    bar.style.width = ((current / leaves.length) * 100) + '%';
+  }
+
+  function resetScroll(){
+    pageEls.forEach(function(p){ p.scrollTop = 0; });
+  }
+
+  function go(delta){
+    if (busy) return;
+    var target = current + delta;
+    if (target < 0 || target > leaves.length) return;
+    busy = true;
+
+    var leaf;
+    if (delta > 0){
+      leaf = leaves[current];
+      leaf.style.zIndex = 9000;
+      leaf.classList.add('turning');
+      leaf.classList.add('flipped');
+      current++;
+    } else {
+      leaf = leaves[current - 1];
+      leaf.style.zIndex = 9000;
+      leaf.classList.add('turning');
+      leaf.classList.remove('flipped');
+      current--;
+    }
+    updateInfo();
+    resetScroll();
+
+    window.setTimeout(function(){
+      leaves.forEach(function(l, i){
+        l.classList.remove('turning');
+        l.style.zIndex = (i < current) ? (500 + i) : (leaves.length - i);
+      });
+      busy = false;
+    }, 980);
+  }
+
+  function jumpToPage(n, silent){
+    n = Math.max(1, Math.min(TOTAL, n));
+    var target = isSpread ? Math.floor(n / 2) : (n - 1);
+    target = Math.max(0, Math.min(leaves.length, target));
+    if (target === current) { updateInfo(); return; }
+
+    current = target;
+
+    if (silent){
+      book.classList.add('no-anim');
+      applyZ();
+      updateInfo();
+      window.requestAnimationFrame(function(){
+        window.requestAnimationFrame(function(){ book.classList.remove('no-anim'); });
+      });
+    } else {
+      book.classList.add('no-anim');
+      applyZ();
+      updateInfo();
+      resetScroll();
+      window.requestAnimationFrame(function(){
+        window.requestAnimationFrame(function(){ book.classList.remove('no-anim'); });
+      });
+    }
+  }
+
+  /* ---------- EVENTOS ---------- */
+  btnPrev.addEventListener('click', function(){ go(-1); });
+  btnNext.addEventListener('click', function(){ go(1); });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft')  { go(-1); }
+    if (e.key === 'ArrowRight') { go(1);  }
+  });
+
+  // Índice
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('.toc a') : null;
+    if (!a) return;
+    e.preventDefault();
+    var n = parseInt(a.dataset.goto, 10);
+    if (!isNaN(n)) jumpToPage(n);
+  });
+
+  // Swipe
+  var tx = 0, ty = 0, tracking = false;
+  book.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) return;
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+    tracking = true;
+  }, { passive: true });
+
+  book.addEventListener('touchend', function(e){
+    if (!tracking) return;
+    tracking = false;
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4){
+      go(dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+
+  // Resize
+  var rz;
+  window.addEventListener('resize', function(){
+    clearTimeout(rz);
+    rz = setTimeout(function(){
+      if (spreadMode() !== isSpread) build();
+    }, 220);
+  });
+
+  /* ---------- INIT ---------- */
+  build();
+  renderDonuts(document);
+  updateInfo();
+})();
+</script>
+</body>
+</html>
