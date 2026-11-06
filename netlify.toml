@@ -1,0 +1,5 @@
+# Static site: no build step is needed (plain HTML/CSS/JS).
+# This overrides the "jekyll build" command configured in the Netlify UI.
+[build]
+  command = "echo 'Static site - no build required'"
+  publish = "."
