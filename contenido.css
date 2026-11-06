@@ -1,0 +1,194 @@
+/* CONTENIDO DE PÁGINAS: tipografía, tablas, KPI, donas, barras, portada, índice */
+/* ============ PÁGINA ============ */
+.pg{
+  position:absolute;inset:0;
+  padding:26px 30px 44px;
+  overflow-y:auto;overflow-x:hidden;
+  font-size:.95em;
+  line-height:1.52;
+  color:#39404d;
+  scrollbar-width:thin;
+  scrollbar-color:#cfd3da transparent;
+  user-select:text;
+}
+.pg::-webkit-scrollbar{width:5px;}
+.pg::-webkit-scrollbar-thumb{background:#cfd3da;border-radius:3px;}
+.pg::-webkit-scrollbar-track{background:transparent;}
+
+.folio{
+  position:absolute;bottom:11px;left:0;right:0;text-align:center;
+  font-family:var(--font-ui);font-size:.8em;letter-spacing:.16em;
+  color:#b3a8ae;pointer-events:none;
+}
+
+/* tipografía editorial */
+.pg h1,.pg h2,.pg h3,.pg h4{margin:0;}
+.pg h2{
+  font-family:var(--font-display);
+  font-size:1.6em;line-height:1.13;letter-spacing:-.012em;
+  color:var(--guinda-2);
+}
+.pg h3{
+  font-family:var(--font-body);
+  font-size:.92em;font-weight:700;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--guinda);
+  margin:1.15em 0 .5em;
+}
+.pg p{margin:0 0 .72em;text-align:justify;hyphens:auto;}
+.pg ul{margin:.2em 0 .8em 1.05em;padding:0;}
+.pg li{margin-bottom:.32em;}
+.pg strong{color:var(--guinda-2);font-weight:700;}
+
+.kicker{
+  font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.22em;
+  font-size:.72em;font-weight:700;color:var(--plomo-2);margin-bottom:.35em;
+}
+.rule{width:50px;height:3px;background:linear-gradient(90deg,var(--guinda),#c07a92);border-radius:2px;margin:.55em 0 .95em;}
+.lead{font-size:1.02em;color:#4a5361;}
+.small{font-size:.8em;color:var(--plomo);}
+
+/* tablas */
+.pg table{width:100%;border-collapse:collapse;font-size:.8em;margin:.55em 0 .8em;}
+.pg thead th{
+  background:var(--guinda);color:#fff;font-weight:600;
+  padding:5px 7px;text-align:left;
+  font-family:var(--font-ui);letter-spacing:.05em;font-size:1.06em;
+  border-right:1px solid rgba(255,255,255,.12);
+}
+.pg thead th:last-child{border-right:0;}
+.pg td{padding:4px 7px;border-bottom:1px solid #eceef1;}
+.pg tbody tr:nth-child(even){background:#faf7f8;}
+.pg .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.pg tr.total td{font-weight:700;background:#f4e8ec;border-top:2px solid var(--guinda);border-bottom:0;}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.55em;margin:.85em 0;}
+.kpi{
+  background:linear-gradient(160deg,#fdfbfc,#f3eff1);
+  border:1px solid #ecdfe4;border-left:3px solid var(--guinda);
+  border-radius:7px;padding:.55em .65em;
+}
+.kpi .k-label{font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.1em;font-size:.66em;color:var(--plomo);font-weight:600;line-height:1.15;}
+.kpi .k-value{font-family:var(--font-display);font-size:1.45em;font-weight:700;color:var(--guinda-2);line-height:1.1;margin-top:.12em;}
+.kpi .k-sub{font-size:.64em;color:var(--plomo-2);line-height:1.2;}
+
+/* dona */
+.donut-block{display:flex;gap:1em;align-items:center;margin:.6em 0 .9em;}
+.donut{flex:0 0 148px;max-width:148px;}
+.donut svg{width:100%;height:auto;display:block;}
+.d-center{font-family:var(--font-display);font-size:34px;font-weight:700;fill:#4a0f22;}
+.d-sub{font-family:var(--font-ui);font-size:14px;letter-spacing:.13em;fill:#8a94a3;text-transform:uppercase;font-weight:600;}
+.donuts-3{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em;margin:.7em 0 .9em;}
+.donuts-3 .donut{flex:none;max-width:100%;width:100%;}
+.donuts-3 .d-center{font-size:30px;}
+.donuts-3 .d-sub{font-size:13px;}
+
+.legend{display:flex;flex-direction:column;gap:.32em;font-size:.8em;min-width:0;}
+.legend .li{display:flex;align-items:center;gap:.45em;color:var(--plomo);}
+.legend .dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto;}
+.legend b{color:var(--guinda-2);font-variant-numeric:tabular-nums;}
+
+/* barras */
+.bar-line{margin-bottom:.52em;}
+.bar-line .bl-head{display:flex;justify-content:space-between;font-size:.76em;font-weight:700;color:var(--plomo);margin-bottom:.18em;font-family:var(--font-ui);letter-spacing:.05em;text-transform:uppercase;}
+.bar-track{height:11px;background:#eceef2;border-radius:6px;overflow:hidden;display:flex;}
+.bar-seg{height:100%;}
+.bar-seg.priv{background:var(--azulino);}
+.bar-seg.pub{background:var(--rojizo);}
+
+/* cajas nota */
+.note{
+  background:#f7f3f5;border-left:4px solid var(--guinda);
+  border-radius:0 7px 7px 0;padding:.6em .8em;font-size:.78em;
+  color:#5b4a51;margin:.7em 0;
+}
+.source{font-size:.72em;color:var(--plomo-2);border-top:1px dashed #d9dde3;padding-top:.45em;margin-top:.7em;font-style:italic;}
+
+/* dos columnas */
+.two-col{column-count:2;column-gap:1.6em;font-size:.86em;}
+.two-col p{text-align:justify;}
+.def{break-inside:avoid;margin-bottom:.7em;}
+.def b{color:var(--guinda-2);}
+
+/* ============ PORTADA ============ */
+.cover-pg{
+  padding:0 !important;
+  background:
+    radial-gradient(120% 80% at 15% 0%, #8f2a4d 0%, #5c1229 45%, #2b0713 100%);
+  color:#fff;overflow:hidden;
+}
+.cover-pg::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.028) 0 1px, transparent 1px 12px);
+  pointer-events:none;
+}
+.cover-wrap{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:1.9em 2em;z-index:1;}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover-mark{
+  font-family:var(--font-ui);font-weight:700;letter-spacing:.28em;font-size:.82em;
+  border:1px solid rgba(255,255,255,.4);padding:.35em .8em;border-radius:3px;
+}
+.cover-year{
+  font-family:var(--font-display);font-size:2.1em;font-weight:700;line-height:1;
+  color:rgba(255,255,255,.92);
+}
+.cover-center{text-align:left;}
+.cover-eyebrow{
+  font-family:var(--font-ui);text-transform:uppercase;letter-spacing:.34em;
+  font-size:.76em;font-weight:600;color:#e9b8c6;margin-bottom:.7em;
+}
+.cover-pg h1{
+  font-family:var(--font-display);
+  font-size:2.15em;line-height:1.1;font-weight:700;letter-spacing:-.015em;
+  margin:0 0 .55em;color:#fff;
+}
+.cover-line{width:64px;height:3px;background:#e9b8c6;margin-bottom:.85em;border-radius:2px;}
+.cover-sub{font-size:.92em;color:#f2dbe2;max-width:24em;line-height:1.45;margin:0;}
+.cover-foot{
+  display:flex;flex-direction:column;gap:.2em;
+  font-family:var(--font-ui);letter-spacing:.1em;text-transform:uppercase;
+  font-size:.7em;color:#dcb0be;border-top:1px solid rgba(255,255,255,.18);padding-top:.8em;
+}
+
+/* contraportada */
+.back-pg{
+  padding:0 !important;
+  background:radial-gradient(120% 80% at 85% 100%, #7c1d3d 0%, #4a0f22 50%, #240610 100%);
+  color:#fff;
+}
+.back-wrap{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:2em;}
+.back-title{font-family:var(--font-display);font-size:1.5em;line-height:1.2;color:#fff;margin-bottom:.6em;}
+.back-txt{font-size:.82em;color:#e6c8d2;line-height:1.5;}
+.back-tag{
+  display:inline-block;font-family:var(--font-ui);letter-spacing:.22em;text-transform:uppercase;
+  font-size:.68em;border:1px solid rgba(255,255,255,.3);padding:.4em .9em;border-radius:999px;color:#f0d4dc;
+}
+
+/* ============ ÍNDICE ============ */
+.toc{list-style:none;margin:.4em 0 0;padding:0;font-size:.86em;}
+.toc li{margin:0;}
+.toc a{
+  display:flex;align-items:baseline;gap:.5em;
+  padding:.34em 0;color:#39404d;text-decoration:none;border-bottom:1px dotted #d8dbe1;
+  transition:color .2s;
+}
+.toc a:hover{color:var(--guinda);}
+.toc .t-num{font-family:var(--font-ui);font-weight:700;font-size:.92em;color:var(--guinda);min-width:2.1em;}
+.toc .t-txt{flex:1;}
+.toc .t-pg{font-family:var(--font-ui);font-weight:700;color:var(--plomo-2);}
+
+
+@media (max-width:880px){
+  .pg{padding:20px 20px 40px;}
+  .kpis{grid-template-columns:repeat(2,1fr);}
+  .donut-block{flex-direction:column;align-items:flex-start;gap:.5em;}
+  .donut{flex:none;width:130px;max-width:130px;}
+  .two-col{column-count:1;}
+}
+@media (max-width:480px){
+  .pg{font-size:.98em;}
+  .pg h2{font-size:1.35em;}
+  .donuts-3{grid-template-columns:1fr;gap:.2em;}
+  .donuts-3 .donut{width:120px;}
+}

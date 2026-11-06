@@ -1,0 +1,164 @@
+/* =====================================================================
+   TAPAS DURAS, CONTROLES Y CAJÓN DE ÍNDICE
+   Se carga DESPUÉS de libro.css y contenido.css (sobrescribe lo necesario)
+   ===================================================================== */
+
+/* ---------- Disposición general ---------- */
+body{overflow:auto;justify-content:flex-start;padding:18px 14px 110px;}
+.stage{margin:auto 0;padding:12px 0;}
+.book{overflow:visible;background:none;box-shadow:none;transition:width .25s ease;}
+.book::before{display:none;}
+.book-inner{transition:transform .9s cubic-bezier(.42,.05,.28,1);}
+.leaf{transition:transform var(--flip,.95s) cubic-bezier(.42,.05,.28,1);}
+.no-anim .book-inner{transition:none !important;}
+
+/* libro cerrado: portada / contraportada centradas */
+.book.at-start .book-inner{transform:translateX(-25%);}
+.book.at-end .book-inner{transform:translateX(25%);}
+.book.at-start .gutter,.book.at-end .gutter{opacity:0;}
+.gutter{transition:opacity .4s;}
+
+.sombra{
+  position:absolute;inset:0;border-radius:8px;pointer-events:none;
+  box-shadow:0 40px 90px rgba(0,0,0,.70),0 8px 24px rgba(0,0,0,.45);
+  transition:inset .9s cubic-bezier(.42,.05,.28,1);
+}
+.book.at-start .sombra{inset:0 0 0 50%;}
+.book.at-end .sombra{inset:0 50% 0 0;}
+.book.single .sombra{inset:0;}
+
+/* ---------- Tapa dura: tablero que sobresale del bloque de hojas ---------- */
+.leaf.board{top:-7px;height:calc(100% + 14px);right:-7px;width:calc(50% + 7px);}
+.book.single .leaf.board{top:0;height:100%;right:0;width:100%;}
+.leaf.board .face{background:#3a0b1a;}
+.leaf.board .face.front{border-radius:3px 9px 9px 3px;}
+.leaf.board .face.back{border-radius:9px 3px 3px 9px;}
+.book:not(.single) .leaf.board .face{
+  box-shadow:0 0 0 1px rgba(0,0,0,.5), 3px 0 0 -1px #240510;
+}
+
+.cover-pg,.back-pg{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);
+}
+.cover-pg{border-radius:3px 9px 9px 3px;box-shadow:inset 16px 0 20px -14px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.07);}
+.back-pg{border-radius:9px 3px 3px 9px;box-shadow:inset -16px 0 20px -14px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.07);}
+/* marco dorado repujado */
+.cover-pg::after,.back-pg::after{
+  content:'';position:absolute;inset:16px;pointer-events:none;z-index:2;
+  border:1px solid rgba(233,196,150,.50);border-radius:3px;
+  box-shadow:inset 0 0 0 5px transparent, inset 0 0 0 6px rgba(233,196,150,.18);
+}
+.cover-wrap,.back-wrap{position:relative;}
+.cover-wrap{padding-left:2.6em;}
+.cover-wrap::before,.back-wrap::before{ /* canal de la bisagra */
+  content:'';position:absolute;top:0;bottom:0;width:3px;
+  background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(255,255,255,.10));
+}
+.cover-wrap::before{left:1.15em;}
+.back-wrap::before{right:1.15em;}
+.back-wrap{padding-right:2.6em;}
+.cover-year{color:#ecd2ab;}
+.cover-pg h1{text-shadow:0 2px 0 rgba(0,0,0,.35);}
+.cover-mark{border-color:rgba(236,210,171,.55);color:#ecd2ab;}
+
+/* ---------- Guardas (hojas de respeto) y página de notas ---------- */
+.pg.endpaper{
+  inset:7px;padding:0;overflow:hidden;
+  background-color:#f3ebe2;
+  background-image:
+    repeating-linear-gradient(45deg,rgba(122,31,61,.11) 0 2px,transparent 2px 16px),
+    repeating-linear-gradient(-45deg,rgba(122,31,61,.11) 0 2px,transparent 2px 16px);
+}
+.pg.notas .lines{
+  height:68%;
+  background:repeating-linear-gradient(transparent 0 1.95em,#dde0e6 1.95em calc(1.95em + 1px));
+}
+.book.single .pg.endpaper{inset:0;}
+
+/* zonas de clic en los bordes */
+.zona{
+  position:absolute;top:0;bottom:0;width:5%;z-index:9500;border:0;padding:0;cursor:pointer;
+  background:none;transition:background .2s;
+}
+.zona.prev{left:0;}.zona.next{right:0;}
+.zona.prev:hover{background:linear-gradient(90deg,rgba(255,255,255,.14),transparent);}
+.zona.next:hover{background:linear-gradient(270deg,rgba(255,255,255,.14),transparent);}
+.book.at-start .zona.prev,.book.at-end .zona.next{display:none;}
+
+/* ---------- Barra de controles ---------- */
+.barra{
+  position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:5000;
+  width:min(900px,96vw);padding:10px 14px 11px;border-radius:18px;
+  display:flex;flex-direction:column;gap:9px;
+  background:rgba(20,22,28,.84);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.10);box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+.progreso{height:6px;border-radius:99px;background:rgba(255,255,255,.12);cursor:pointer;overflow:hidden;}
+.progreso i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c07a92,#8f2547);transition:width .5s ease;}
+.fila{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;}
+.btn{
+  width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;color:#fff;
+  background:rgba(255,255,255,.08);font:700 17px/1 var(--font-ui);
+  display:grid;place-items:center;transition:background .2s,transform .15s,opacity .2s;
+}
+.btn:hover:not(:disabled){background:var(--guinda);transform:translateY(-1px);}
+.btn:focus-visible,.pagina input:focus-visible{outline:2px solid #e9b8c6;outline-offset:2px;}
+.btn:disabled{opacity:.3;cursor:not-allowed;}
+.btn.on{background:var(--guinda);}
+.btn.grande{width:44px;height:44px;font-size:22px;background:linear-gradient(180deg,#8f2547,#6b1a35);}
+.sep{width:1px;height:22px;background:rgba(255,255,255,.16);margin:0 4px;}
+.pagina{
+  display:flex;align-items:center;gap:7px;min-width:210px;justify-content:center;
+  font-family:var(--font-ui);letter-spacing:.1em;font-size:.82rem;text-transform:uppercase;color:#d7dbe2;font-weight:600;
+}
+.pagina input{
+  width:58px;height:32px;text-align:center;border-radius:8px;border:1px solid rgba(255,255,255,.2);
+  background:rgba(0,0,0,.3);color:#fff;font:700 .95rem var(--font-ui);
+}
+.zoomlbl{min-width:44px;text-align:center;font:600 .78rem var(--font-ui);letter-spacing:.06em;color:#c9ced8;}
+
+/* ---------- Cajón de índice ---------- */
+.cajon{
+  position:fixed;top:0;left:0;bottom:0;width:min(350px,88vw);z-index:6000;overflow:auto;
+  padding:22px 20px;color:#eee;background:rgba(24,18,22,.97);
+  transform:translateX(-104%);transition:transform .3s ease;box-shadow:12px 0 40px rgba(0,0,0,.5);
+}
+.cajon.open{transform:none;}
+.cajon h2{font:700 1.4rem var(--font-display);margin:0 0 .2em;color:#fff;}
+.cajon .toc{font-size:.92rem;}
+.cajon .toc a{color:#e9dde2;border-bottom-color:rgba(255,255,255,.16);}
+.cajon .toc a:hover{color:#f0b8c8;}
+.cajon .toc .t-num{color:#e9b8c6;}
+.cajon .cerrar{position:absolute;top:12px;right:12px;}
+
+@media (max-width:600px){
+  .esc{display:none;}
+  .pagina{min-width:0;}
+  .btn{width:36px;height:36px;}
+}
+/* ---------- Giro de página más marcado ---------- */
+.book-inner{perspective:1900px;}
+.leaf.turning .face{box-shadow:0 0 38px rgba(0,0,0,.45);}
+.face::after{background:linear-gradient(to left,rgba(30,10,18,0) 30%,rgba(30,10,18,.38) 100%);}
+.face.back::after{background:linear-gradient(to right,rgba(30,10,18,0) 30%,rgba(30,10,18,.38) 100%);}
+.enlace-pdf{display:block;margin:.6em 0 1em;padding:.6em .8em;border-radius:8px;background:var(--guinda);color:#fff;text-decoration:none;font:700 .85rem var(--font-ui);letter-spacing:.08em;text-transform:uppercase;text-align:center;}
+.enlace-pdf[hidden]{display:none;}
+
+/* ---------- Impresión / PDF: una hoja A5 por página ---------- */
+#impresion{display:none;}
+@media print{
+  @page{size:A5;margin:0;}
+  html,body{background:#fff !important;height:auto;overflow:visible;display:block;padding:0;margin:0;}
+  .stage,.barra,.cajon,noscript{display:none !important;}
+  #impresion{display:block;font-size:3.6mm;color:#39404d;}
+  .hoja-pdf{
+    position:relative;width:148mm;min-height:210mm;background:#fff;overflow:hidden;
+    break-after:page;page-break-after:always;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .hoja-pdf .pg{position:relative;inset:auto;min-height:210mm;overflow:visible;padding-bottom:14mm;}
+  .hoja-pdf .cover-pg,.hoja-pdf .back-pg{height:210mm;overflow:hidden;border-radius:0;box-shadow:none;}
+  .hoja-pdf .cover-pg::after,.hoja-pdf .back-pg::after,.hoja-pdf .cover-wrap::before,.hoja-pdf .back-wrap::before{display:none;}
+  .hoja-pdf .cover-wrap,.hoja-pdf .back-wrap{padding-left:2em;padding-right:2em;}
+  .hoja-pdf .folio{position:absolute;bottom:5mm;left:0;right:0;}
+}
