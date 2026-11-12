@@ -42,8 +42,8 @@ BOLETIN.add(`
     <div class="rule"></div>
 
     <h3>Dirección</h3>
-    <p class="lead"><strong>Ana Julia Enciso Trujillo</strong><br>
-    Directora de la Unidad de Gestión Educativa Local N.º 07</p>
+    <p class="lead"><strong>Oscar Teobaldo Rojas Camacho</strong><br>
+    Director de la Unidad de Gestión Educativa Local N.º 07</p>
 
     <h3>Área responsable de la publicación</h3>
     <p class="lead">Área de Planificación y Presupuesto</p>
